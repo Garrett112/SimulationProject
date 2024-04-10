@@ -127,11 +127,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="customer.cpp" />
+    <ClCompile Include="customerQueue.cpp" />
     <ClCompile Include="linkedList.cpp" />
+    <ClCompile Include="LinkList.cpp" />
+    <ClCompile Include="server.cpp" />
+    <ClCompile Include="serverList.cpp" />
     <ClCompile Include="SimulationProject.cpp" />
+    <ClCompile Include="unorderedLinkedList.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="customer.h" />
+    <ClInclude Include="customerQueue.h" />
     <ClInclude Include="linkedList.h" />
+    <ClInclude Include="LinkList.h" />
+    <ClInclude Include="server.h" />
+    <ClInclude Include="serverList.h" />
+    <ClInclude Include="unorderedLinkedList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
