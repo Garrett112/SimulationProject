@@ -98,5 +98,8 @@ public:
 			cursor = cursor->link;
 		}
 	}
+	void checkServers(int) {
+
+	}
 };
 

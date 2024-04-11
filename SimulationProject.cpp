@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <random>
 #include "customerQueue.h"
 #include "serverList.h"
 
@@ -20,7 +21,11 @@ int main()
     cout << endl << "Enter time units between customer arrivals: ";
     cin >> customerFrequency;
     cout << endl;
+    cout << "-----------------------------------------------------" << endl;
 
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dis(1, customerFrequency);
     CustomerQueue Queue;
     serverList List;
     Queue.setCustomerFrequency(customerFrequency);
@@ -30,7 +35,7 @@ int main()
     }
     int t = 0;
     while (t <= timeUnits-1) {
-        Queue.checkCustomer(t);
+        Queue.checkCustomer(dis(gen), t);
         if (Queue.getLength() > 0) {
             int sID = List.findFree();
             if (sID != -1) {
@@ -41,7 +46,12 @@ int main()
         Queue.updateTime();
         t++;
     }
-
-    
+    cout << "-----------------------------------------------------" << endl;
+    cout << endl << "Number of customers left in queue: " << Queue.getLength() << endl;
+    cout << endl << "Number of customers that arrived: " << Queue.getCustomerCount() << endl;
+    cout << endl << "Number of customers who completed a transaction: " << Queue.getCustomerServed() << endl;
+    if (Queue.getLength() != 0) {
+        cout << endl << "Average wait time for customers in the queue: " << Queue.getWaitTimes();
+    }
 }
 

@@ -10,6 +10,7 @@ class CustomerQueue : public LinkList<Customer> {
 private:
     int customerCount;
     int customerFrequency;
+    int customerServed;
     nodeType<Customer>* cursor;
 public:
 
@@ -22,7 +23,7 @@ public:
         customerFrequency = f;
     }
 
-    void addCustomer() {
+    void addCustomer(int t) {
         customerCount++;
         increaseLength();
         nodeType<Customer>* newNode;
@@ -37,18 +38,20 @@ public:
             last->link = newNode;
             last = last->link;
         }
+        cout << "Customer number: " << customerCount << " arrived at time unit: " << t << endl;
     }
 
     Customer removeCustomer() {
         cursor = first;
         first = first->link;
         reduceLength();
+        customerServed++;
         return cursor->info;
     }
 
-    void checkCustomer(int t) {
-        if (t % customerFrequency == 0) {
-            addCustomer();
+    void checkCustomer(int r, int t) {
+        if (r == 1) {
+            addCustomer(t);
         }
     }
 
@@ -66,11 +69,19 @@ public:
 
     float getWaitTimes() {
         float total = 0;
-        nodeType<Customer>* cursor = this->first;
+        nodeType<Customer>* cursor = first;
         while (cursor != nullptr) {
             total = total + cursor->info.getWaitTime();
             cursor = cursor->link;
         }
         return total / getLength();
+    }
+
+    int getCustomerCount() {
+        return customerCount;
+    }
+    
+    int getCustomerServed() {
+        return customerServed;
     }
 };
